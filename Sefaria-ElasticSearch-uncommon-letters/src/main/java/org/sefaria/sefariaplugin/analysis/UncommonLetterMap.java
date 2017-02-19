@@ -33,7 +33,6 @@ public class UncommonLetterMap {
                 u'צ': 1.0
             }
      */
-    public static final int LEN_MIN_WORD = 3;
 
 
     private static final Character[] LETTER_FREQS = {
@@ -44,27 +43,40 @@ public class UncommonLetterMap {
             'ג','צ'
     };
     private List<Character> letter_freq_list;
+    private int len_min_word;
 
-    public UncommonLetterMap() {
-        letter_freq_list = Arrays.asList(LETTER_FREQS);
+
+    public UncommonLetterMap(int len_min_word) {
+        this.letter_freq_list = Arrays.asList(LETTER_FREQS);
+        this.len_min_word = len_min_word;
     }
 
     public String getMinifiedWord(String word) {
+        Queue<LetterFreqPair> mostInfreq = new LinkedList<LetterFreqPair>();
+        PriorityQueue<LetterFreqPair> infreqHeap = new PriorityQueue<LetterFreqPair>();
+        for (char letter : word.toCharArray()) {
+            int ind = letter_freq_list.indexOf(letter);
+            if (ind != -1) {
+                if (infreqHeap.size() <= this.len_min_word || ind > infreqHeap.peek().freq) {
+                    LetterFreqPair lfp = new LetterFreqPair(letter, ind);
+                    mostInfreq.add(lfp);
+                    infreqHeap.add(lfp);
+                }
+                if (mostInfreq.size() > this.len_min_word) {
+                    mostInfreq.remove(infreqHeap.poll());
+                }
+            }
+        }
 
         String out = "";
-        for (int i = 0; i < LEN_MIN_WORD; i++) {
-            out += "0";
-        }
-        Queue<LetterFreqPair> mostInfreq = new LinkedList<LetterFreqPair>();
-        int leastInfreqInQ = LETTER_FREQS.length;
-        for (char letter : word.toCharArray()) {
-            int ind = LETTER_FREQS.ind
+        for (LetterFreqPair lfp : mostInfreq) {
+            out += lfp.letter;
         }
 
         return out;
     }
 
-    private class LetterFreqPair {
+    private class LetterFreqPair implements Comparable<LetterFreqPair> {
         private char letter;
         private int freq;
 
@@ -79,6 +91,10 @@ public class UncommonLetterMap {
 
         public int getFreq() {
             return this.freq;
+        }
+
+        public int compareTo(LetterFreqPair other) {
+            return this.freq - other.freq;
         }
     }
 }
