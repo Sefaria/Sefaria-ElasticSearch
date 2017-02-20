@@ -30,5 +30,5 @@ public class SefariaAnalyzerProvider extends AbstractIndexAnalyzerProvider<Sefar
     protected SefariaAnalyzer analyzer = new SefariaAnalyzer();
 
     /* Name to associate with this class. We will use this in PlusSignBinderProcessor. */
-    public static final String NAME = "sefaria-infreq";
+    public static final String NAME = "sefaria-ngram";
 }

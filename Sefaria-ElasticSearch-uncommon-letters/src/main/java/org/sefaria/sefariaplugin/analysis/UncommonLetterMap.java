@@ -42,12 +42,28 @@ public class UncommonLetterMap {
             'ק','פ','ס','ט','ז',
             'ג','צ'
     };
+    private static final Character[] SOFITIM = {
+            'ך','ם','ן','ף','ץ'
+    };
+    private static final Character[] NONSOFITIM = {
+            'כ','מ','נ','פ','צ'
+    };
+
+
+
     private List<Character> letter_freq_list;
+    private Map<Character, Character> sofitMap;
     private int len_min_word;
 
 
     public UncommonLetterMap(int len_min_word) {
         this.letter_freq_list = Arrays.asList(LETTER_FREQS);
+        this.sofitMap = new HashMap<Character, Character>();
+        for (int i = 0; i < SOFITIM.length; i++) {
+            this.sofitMap.put(SOFITIM[i], NONSOFITIM[i]);
+        }
+
+
         this.len_min_word = len_min_word;
     }
 
@@ -55,6 +71,7 @@ public class UncommonLetterMap {
         Queue<LetterFreqPair> mostInfreq = new LinkedList<LetterFreqPair>();
         PriorityQueue<LetterFreqPair> infreqHeap = new PriorityQueue<LetterFreqPair>();
         for (char letter : word.toCharArray()) {
+            letter = this.sofitMap.containsKey(letter) ? this.sofitMap.get(letter) : letter;
             int ind = letter_freq_list.indexOf(letter);
             if (ind != -1) {
                 if (infreqHeap.size() <= this.len_min_word || ind > infreqHeap.peek().freq) {
@@ -70,7 +87,7 @@ public class UncommonLetterMap {
 
         String out = "";
         for (LetterFreqPair lfp : mostInfreq) {
-            out += lfp.letter;
+            out += lfp.getLetter();
         }
 
         return out;
