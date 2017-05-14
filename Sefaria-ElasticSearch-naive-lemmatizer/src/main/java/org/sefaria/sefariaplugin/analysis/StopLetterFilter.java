@@ -6,6 +6,8 @@ import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StopLetterFilter extends TokenFilter {
 
@@ -14,12 +16,15 @@ public class StopLetterFilter extends TokenFilter {
     private PositionIncrementAttribute positionIncrementAttribute =
             addAttribute(PositionIncrementAttribute.class);
     private String stopLettersPat;
+    private List<Character> stopLetterList;
 
     public StopLetterFilter(TokenStream tokenStream, char[] stopLetters) {
         super(tokenStream);
         this.stopLettersPat = "[";
+        this.stopLetterList = new ArrayList<Character>();
         for (char ch : stopLetters) {
             stopLettersPat += ch;
+            this.stopLetterList.add(ch);
         }
         this.stopLettersPat += "]";
     }
@@ -42,6 +47,24 @@ public class StopLetterFilter extends TokenFilter {
     }
 
     private String filterStopLetters(String in) {
-        return in.replaceAll(this.stopLettersPat, "");
+        if (in.length() <= 3) {
+            return in; //don't even bother
+        }
+        String potentialOut = in.replaceAll(this.stopLettersPat, "");
+        if (potentialOut.length() >= 3) {
+            return potentialOut;
+        } else {
+            int maxLettersToRemove = in.length() - 3;
+            int numRemoved = 0;
+            StringBuilder out = new StringBuilder();
+            for (int i = 0; i < in.length(); i++) {
+                char currChar = in.charAt(i);
+                if (stopLetterList.indexOf(currChar) != -1 && numRemoved < maxLettersToRemove) {
+                    continue;
+                }
+                out.append(currChar);
+            }
+            return out.toString();
+        }
     }
 }
