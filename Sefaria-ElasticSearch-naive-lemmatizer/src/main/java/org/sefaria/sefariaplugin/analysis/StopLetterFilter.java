@@ -15,18 +15,11 @@ public class StopLetterFilter extends TokenFilter {
     private HebrewTokenTypeAttribute hebTokAttribute = addAttribute(HebrewTokenTypeAttribute.class);
     private PositionIncrementAttribute positionIncrementAttribute =
             addAttribute(PositionIncrementAttribute.class);
-    private String stopLettersPat;
-    private List<Character> stopLetterList;
+    private StopLetterReplacer slr;
 
     public StopLetterFilter(TokenStream tokenStream, char[] stopLetters) {
         super(tokenStream);
-        this.stopLettersPat = "[";
-        this.stopLetterList = new ArrayList<Character>();
-        for (char ch : stopLetters) {
-            stopLettersPat += ch;
-            this.stopLetterList.add(ch);
-        }
-        this.stopLettersPat += "]";
+        this.slr = new StopLetterReplacer(stopLetters, 3);
     }
 
     @Override
@@ -39,32 +32,10 @@ public class StopLetterFilter extends TokenFilter {
         String currToken =
                 this.input.getAttribute(CharTermAttribute.class).toString().trim();
         if ( ! this.hebTokAttribute.isExact()) {
-            this.charTermAttribute.setEmpty().append(filterStopLetters(currToken));
+            this.charTermAttribute.setEmpty().append(this.slr.filterStopLetters(currToken));
             this.hebTokAttribute.setExact(false);
         }
 
         return true;
-    }
-
-    private String filterStopLetters(String in) {
-        if (in.length() <= 3) {
-            return in; //don't even bother
-        }
-        String potentialOut = in.replaceAll(this.stopLettersPat, "");
-        if (potentialOut.length() >= 3) {
-            return potentialOut;
-        } else {
-            int maxLettersToRemove = in.length() - 3;
-            int numRemoved = 0;
-            StringBuilder out = new StringBuilder();
-            for (int i = 0; i < in.length(); i++) {
-                char currChar = in.charAt(i);
-                if (stopLetterList.indexOf(currChar) != -1 && numRemoved < maxLettersToRemove) {
-                    continue;
-                }
-                out.append(currChar);
-            }
-            return out.toString();
-        }
     }
 }

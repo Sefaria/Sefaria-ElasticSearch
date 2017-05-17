@@ -28,6 +28,8 @@ public class SefariaAnalyzer extends Analyzer {
         filter = new PluralFilter(filter);
         filter = new PrefixFilter(filter);
         filter = new StopLetterFilter(filter, stopLetters);
+        filter = new SofitLetterFilter(filter);
+        filter = new AlternateSpellingFilter(filter);
         //filter = new SefariaNGramTokenFilter(filter, 3);
         return new TokenStreamComponents(tokenizer, filter);
     }
