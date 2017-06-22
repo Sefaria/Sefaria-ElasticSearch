@@ -5,8 +5,7 @@ import  org.apache.lucene.analysis.TokenStream;
 import  org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import  org.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;
 import  java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Pattern;
 
 public class PluralFilter extends TokenFilter {
@@ -16,12 +15,13 @@ public class PluralFilter extends TokenFilter {
     private PositionIncrementAttribute positionIncrementAttribute =
             addAttribute(PositionIncrementAttribute.class);
     private List<String> previousTokens;
-    private Pattern pluralPat;
+    private PluralReplacer pluralReplacer;
+
 
     public PluralFilter(TokenStream tokenStream) {
         super(tokenStream);
         this.previousTokens = new ArrayList<String>();
-        this.pluralPat = Pattern.compile("(.{3,})(ים|ות)$");
+        this.pluralReplacer = new PluralReplacer();
     }
 
 
@@ -55,7 +55,7 @@ public class PluralFilter extends TokenFilter {
             }
         }
 
-        previousTokens.add(filterPlural(nextToken));
+        previousTokens.add(pluralReplacer.filterPlural(nextToken));
 
         // Save the current token
         this.charTermAttribute.setEmpty().append(nextToken).append('$');
@@ -64,7 +64,4 @@ public class PluralFilter extends TokenFilter {
         return true;
     }
 
-    private String filterPlural(String in) {
-        return in.replaceFirst("(.{3,})(ים|ות)$","$1");
-    }
 }
