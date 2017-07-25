@@ -13,13 +13,13 @@ First you need to locate the `bin` folder in your ES installation (henceforth `$
 Let's say you're trying to install a plugin in folder `$PLUGIN_ROOT`:
 
 1. Start ElasticSearch
-   a. If ElasticSearch is a service, run `service start elasticsearch`
-   b. If you downloaded the source, run `$ES_BIN/elasticsearch`
+   - If ElasticSearch is a service, run `service start elasticsearch`
+   - If you downloaded the source, run `$ES_BIN/elasticsearch`
 2. (OPTIONAL) If you're reinsalling a plugin, first unistall it
-   a. Locate the name of the plugin. This should be in `$PLUGIN_ROOT/plugin-descriptor.properties` under the `name` variable. Let's call it `$PLUGIN_NAME`
-   b. `$ES_BIN/plugin remove $PLUGIN_NAME`
+   - Locate the name of the plugin. This should be in `$PLUGIN_ROOT/plugin-descriptor.properties` under the `name` variable. Let's call it `$PLUGIN_NAME`
+   - `$ES_BIN/plugin remove $PLUGIN_NAME`
 3. Install plugin
-   a. `$ES_BIN/plugin install file://$PLUGIN_ROOT/out/artifacts/elasticsearch_analysis_sefaria_jar.zip` (NOTE: this path needs to be absolute)
+   - `$ES_BIN/plugin install file://$PLUGIN_ROOT/out/artifacts/elasticsearch_analysis_sefaria_jar.zip` (NOTE: this path needs to be absolute)
    
    
    
