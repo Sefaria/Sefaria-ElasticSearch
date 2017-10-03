@@ -9,7 +9,7 @@ import java.util.Set;
  */
 public class PluralReplacer {
 
-    private String[] pluralExceptionsArray = { "שמים"};
+    private String[] pluralExceptionsArray = { "שמים","ירושלים","אפרים","אלוהים","אלהים"};
     private Set<String> pluralExceptionsSet;
     private String pluralPat;
 

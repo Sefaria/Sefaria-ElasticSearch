@@ -16,20 +16,25 @@ public class StopLetterReplacer {
         this.minLength = minLength;
 
         //dots ensure that there is a character before and after the stop letter
-        this.stopLettersPat = ".[";
+        this.stopLettersPat = "(.)(?:";
         this.stopLetterList = new ArrayList<Character>();
+        boolean isFirst = true;
         for (char ch : stopLetters) {
-            stopLettersPat += ch;
+            if (!isFirst) {
+                stopLettersPat += "|";
+            }
+            isFirst = false;
+            stopLettersPat += ch + "([^" + ch + "])"; // look for ch not followed by ch
             this.stopLetterList.add(ch);
         }
-        this.stopLettersPat += "].";
+        this.stopLettersPat += ")";
     }
 
     public String filterStopLetters(String in) {
         if (in.length() <= this.minLength) {
             return in; //don't even bother
         }
-        String potentialOut = in.replaceAll(this.stopLettersPat, "");
+        String potentialOut = in.replaceAll(this.stopLettersPat, "$1$2$3");
         if (potentialOut.length() >= this.minLength) {
             return potentialOut;
         } else {

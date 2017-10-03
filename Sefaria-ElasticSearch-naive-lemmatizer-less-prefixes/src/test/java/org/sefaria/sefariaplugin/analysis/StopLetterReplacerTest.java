@@ -14,6 +14,7 @@ public class StopLetterReplacerTest {
 
         assertEquals("בית", slr.filterStopLetters("בית"));
         assertEquals("ימו", slr.filterStopLetters("יומו"));
+        assertEquals("רוח", slr.filterStopLetters("רווח"));
     }
 
 
