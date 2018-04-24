@@ -17,7 +17,7 @@ public class StopLetterReplacer {
 
         //dots ensure that there is a character before and after the stop letter
         this.stopLettersPat = "(.)(?:";
-        this.stopLetterList = new ArrayList<Character>();
+        this.stopLetterList = new ArrayList<>();
         boolean isFirst = true;
         for (char ch : stopLetters) {
             if (!isFirst) {

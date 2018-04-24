@@ -26,8 +26,8 @@ public class SefariaAnalyzer extends Analyzer {
         filter = new ASCIIFoldingFilter(filter);
         filter = new LowerCaseFilter(filter);
         filter = new PluralFilter(filter);
-        filter = new PrefixFilter(filter); // before StopLetterFilter was first, but that doesn't really make sense
         filter = new StopLetterFilter(filter, stopLetters);
+        filter = new PrefixFilter(filter); // before StopLetterFilter was first, but that doesn't really make sense
         filter = new SofitLetterFilter(filter);
         filter = new AlternateSpellingFilter(filter);
         //filter = new SefariaNGramTokenFilter(filter, 3);

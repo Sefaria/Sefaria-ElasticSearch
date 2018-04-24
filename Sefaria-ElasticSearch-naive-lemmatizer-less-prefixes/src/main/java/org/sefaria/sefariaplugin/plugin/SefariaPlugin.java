@@ -1,23 +1,22 @@
 package org.sefaria.sefariaplugin.plugin;
-import  org.elasticsearch.index.analysis.AnalysisModule;
+import org.apache.lucene.analysis.Analyzer;
+import org.elasticsearch.index.analysis.AnalyzerProvider;
+import org.elasticsearch.indices.analysis.AnalysisModule;
+import org.elasticsearch.plugins.AnalysisPlugin;
 import  org.elasticsearch.plugins.Plugin;
 
-public class SefariaPlugin extends Plugin {
+import java.util.HashMap;
+import java.util.Map;
 
-    /* Set the name that will be assigned to this plugin. */
+public class SefariaPlugin extends Plugin implements AnalysisPlugin {
+
     @Override
-    public String name() {
-        return "plugin-sefaria-naive-lemmatizer-less-prefixes";
+    public Map<String, AnalysisModule.AnalysisProvider<AnalyzerProvider<? extends Analyzer>>> getAnalyzers() {
+        Map<String, AnalysisModule.AnalysisProvider<AnalyzerProvider<? extends Analyzer>>> extra = new HashMap<>();
+
+        extra.put("sefaria-naive-lemmatizer-less-prefixes", SefariaAnalyzerProvider::new);
+
+        return extra;
     }
 
-    /* Return a description of this plugin. */
-    @Override
-    public String description() {
-        return "Sefaria!";
-    }
-
-    /* This is the function that will register our analyzer with Elasticsearch. */
-    public void onModule(AnalysisModule analysisModule) {
-        analysisModule.addProcessor(new SefariaBinderProcessor());
-    }
 }
