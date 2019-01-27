@@ -7,7 +7,7 @@ public class SefariaPlugin extends Plugin {
     /* Set the name that will be assigned to this plugin. */
     @Override
     public String name() {
-        return "plugin-sefaria-aggresive-ngram";
+        return "plugin-sefaria-aggressive-ngram";
     }
 
     /* Return a description of this plugin. */
