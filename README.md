@@ -15,7 +15,7 @@ Let's say you're trying to install a plugin in folder `$PLUGIN_ROOT`:
 1. Start ElasticSearch
    - If ElasticSearch is a service, run `service start elasticsearch`
    - If you downloaded the source, run `$ES_BIN/elasticsearch`
-2. (OPTIONAL) If you're reinsalling a plugin, first unistall it
+2. (OPTIONAL) If you're reinstalling a plugin, first uninstall it
    - Locate the name of the plugin. This should be in `$PLUGIN_ROOT/plugin-descriptor.properties` under the `name` variable. Let's call it `$PLUGIN_NAME`
    - `$ES_BIN/plugin remove $PLUGIN_NAME`
 3. Install plugin
