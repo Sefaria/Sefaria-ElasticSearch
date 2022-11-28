@@ -17,9 +17,9 @@ Let's say you're trying to install a plugin in folder `$PLUGIN_ROOT`:
    - If you downloaded the source, run `$ES_BIN/elasticsearch`
 2. (OPTIONAL) If you're reinsalling a plugin, first unistall it
    - Locate the name of the plugin. This should be in `$PLUGIN_ROOT/plugin-descriptor.properties` under the `name` variable. Let's call it `$PLUGIN_NAME`
-   - `$ES_BIN/plugin remove $PLUGIN_NAME`
+   - `$ES_BIN/elasticsearch-plugin remove $PLUGIN_NAME`
 3. Install plugin
-   - `$ES_BIN/plugin install file://$PLUGIN_ROOT/out/artifacts/elasticsearch_analysis_sefaria_jar.zip` (NOTE: this path needs to be absolute)
+   - `$ES_BIN/elasticsearch-plugin install file://$PLUGIN_ROOT/out/artifacts/elasticsearch_analysis_sefaria_jar.zip` (NOTE: this path needs to be absolute)
    
    
    
