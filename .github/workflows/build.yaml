@@ -20,5 +20,5 @@ jobs:
           distribution: 'adopt'
           cache: maven
       - name: Build with Maven
-        run: mvn --batch-mode --update-snapshots package
+        run: mvn -Delasticsearch.version=${{ matrix.elastic }} package
         working-directory: ${{ matrix.module }}
