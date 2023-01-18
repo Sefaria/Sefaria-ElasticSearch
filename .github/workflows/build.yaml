@@ -38,7 +38,7 @@ jobs:
         with:
           type: "zip"
           directory: Sefaria-ElasticSearch-${{ matrix.module }}/out/artifacts
-          filename: {{ matrix.module }}.zip
+          filename: ${{ matrix.module }}.zip
       - name: Upload artifact
         uses: actions/upload-artifact@v1
         with:
