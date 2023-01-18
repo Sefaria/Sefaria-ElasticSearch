@@ -47,4 +47,4 @@ jobs:
           path: Sefaria-ElasticSearch-${{ matrix.module }}/out/artifacts/${{ matrix.module}}.zip 
       - name: cleanup cache
         run: rm -rf *
-        working-direcetory: Sefaria-ElasticSearch-${{ matrix.module }}/out/artifacts
+        working-directory: Sefaria-ElasticSearch-${{ matrix.module }}/out/artifacts
