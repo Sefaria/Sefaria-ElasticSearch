@@ -24,14 +24,15 @@ jobs:
         run: mvn -Delasticsearch.version=${{ matrix.elastic }} package
         working-directory: Sefaria-ElasticSearch-${{ matrix.module }}
       - name: Populate Properties File
-        run: cat << EOF > out/artifacts/elasticsearch/plugin-descriptor.properties
-               name=analysis-sefaria-${{ matrix.module }}
-               description=Sefaria analyzer powered by Noah
-               classname=org.sefaria.sefariaplugin.plugin.SefariaPlugin
-               elasticsearch.version=${{ matrix.elastic }}
-               java.version=${{ matrix.java }}
-               version=${{ matrix.elastic }}
-               EOF
+        run: |
+          cat << EOF > out/artifacts/elasticsearch/plugin-descriptor.properties
+            name=analysis-sefaria-${{ matrix.module }}
+            description=Sefaria analyzer powered by Noah
+            classname=org.sefaria.sefariaplugin.plugin.SefariaPlugin
+            elasticsearch.version=${{ matrix.elastic }}
+            java.version=${{ matrix.java }}
+            version=${{ matrix.elastic }}
+            EOF
         working-directory: Sefaria-ElasticSearch-${{ matrix.module }}
       - name: Zip Plugin
         uses: thedoctor0/zip-release@0.7.0
