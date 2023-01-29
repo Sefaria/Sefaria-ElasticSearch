@@ -42,7 +42,7 @@ jobs:
         run: |
           cat << EOF > out/artifacts/elasticsearch/plugin-descriptor.properties
             name=analysis-sefaria-${{ matrix.module }}
-            description=Sefaria analyzer powered by Noah
+            description=Sefaria analyzer
             classname=org.sefaria.sefariaplugin.plugin.SefariaPlugin
             elasticsearch.version=${{ matrix.elastic }}
             java.version=${{ matrix.java }}
