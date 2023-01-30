@@ -9,7 +9,7 @@ on:
 jobs:
   release:
     outputs:
-      release: ${{ step.check.outputs.release }}
+      release: ${{ steps.check.outputs.release }}
     steps:
       - name: Create release
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
