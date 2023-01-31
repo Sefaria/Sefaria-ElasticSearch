@@ -20,7 +20,7 @@ jobs:
          GH_TOKEN: ${{ github.token }}
       - name: Get release name
         id: check
-        run : echo release=$(gh release view --json name --jq .name) >> $GITHUB_OUTPUT
+        run : echo release=$(gh release view --json tagName --jq .tagName) >> $GITHUB_OUTPUT
         env:
          GH_TOKEN: ${{ github.token }}
   build:
