@@ -64,7 +64,7 @@ jobs:
       - name: Upload artifact
         run: |
           cd Sefaria-ElasticSearch-${{ matrix.module }}/out/artifacts
-          gh release upload ${{ needs.release.outputs.release }} '${{ matrix.module }}-${{ needs.release.outputs.release }}-${{ matrix.elastic }}.zip'
+          gh release upload ${{ needs.release.outputs.release }} '${{ matrix.module }}-${{ needs.release.outputs.release }}-${{ matrix.elastic }}.zip' --clobber
         env:
          GH_TOKEN: ${{ github.token }}
       - name: cleanup cache
