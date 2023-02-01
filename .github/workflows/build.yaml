@@ -95,6 +95,11 @@ jobs:
           gh release download --pattern '*-${{ matrix.elastic }}.zip'
         env:
          GH_TOKEN: ${{ github.token }}
+      - name: debug
+        run: |
+          ls -al
+          pwd
+          ls build
       - name: Generate image metadata
         id: meta
         uses: docker/metadata-action@v3
