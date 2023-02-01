@@ -31,8 +31,11 @@ jobs:
         module:
           - naive-lemmatizer
           - naive-lemmatizer-less-prefixes 
-        elastic: [6.2.3, 7.17.0] 
-        java: ['11']
+        include:
+        - elastic: 6.2.3 
+          java: '8'
+        - elastic: 7.17.0 
+          java: '11'
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK
