@@ -8,7 +8,7 @@ import org.elasticsearch.plugin.Inject;
 import org.sefaria.sefariaplugin.analysis.SefariaAnalyzer;
 
 
-@NamedComponent( "sefaria-naive-lemmatizer")
+@NamedComponent( "sefaria-naive-lemmatizer-less-prefixes")
 public class SefariaAnalyzerFactory implements AnalyzerFactory {
 
     @Inject
