@@ -1,1 +1,0 @@
-{"org.elasticsearch.plugin.analysis.AnalyzerFactory":{"sefaria-naive-lemmatizer":"org.sefaria.sefariaplugin.SefariaAnalyzerFactory"}}
