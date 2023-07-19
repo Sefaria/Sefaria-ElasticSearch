@@ -71,8 +71,8 @@ jobs:
     strategy:
       matrix:
         module:
-          - naive-lemmatizer
-          - naive-lemmatizer-less-prefixes
+          - sefaria-naive-lemmatizer
+          - sefaria-naive-lemmatizer-less-prefixes
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK
@@ -84,14 +84,14 @@ jobs:
         uses: gradle/gradle-build-action@v2
         with:
           arguments: -PVersion=${{ needs.release.outputs.version }} bundlePlugin
-          build-root-directory: Sefaria-ElasticSearch-${{ matrix.module }}
+          build-root-directory: ${{ matrix.module }}
       - name: Upload artifact
         run: |
-          cd Sefaria-ElasticSearch-${{ matrix.module }}/build/distributions
+          cd ${{ matrix.module }}/build/distributions
           ls
           gh release upload ${{ needs.release.outputs.version }} '${{ matrix.module }}-${{ needs.release.outputs.version }}.zip' --clobber
         env:
          GH_TOKEN: ${{ github.token }}
       - name: cleanup cache
         run: rm -rf *
-        working-directory: Sefaria-ElasticSearch-${{ matrix.module }}/build/distributions
+        working-directory: ${{ matrix.module }}/build/distributions

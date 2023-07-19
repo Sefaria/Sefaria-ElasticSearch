@@ -15,7 +15,7 @@ apply plugin: 'elasticsearch.stable-esplugin'
 apply plugin: 'elasticsearch.yaml-rest-test'
 
 esplugin {
-    name 'analysis-sefaria-naive-lemmatizer-less-prefixes'
+    name 'sefaria-naive-lemmatizer-less-prefixes'
     description 'Sefaria analyzer'
 }
 
