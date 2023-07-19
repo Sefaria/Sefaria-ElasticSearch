@@ -6,7 +6,7 @@ Builds are triggered either by manually creating a release, or by running the `B
 
 # (DEPRECATED) Build Modules - ElasticSearch v7
 
-| NOTE - this is system (and plugin publication for new ElasticSearch 7 versions) is no longer supported
+| NOTE - this system (and plugin publication for new ElasticSearch 7 versions) is no longer supported
 
 The CI/CD system for the Sefaria ElasticSearch Plugins will automatically generate zip files that can be used to install the plugins in specific versions of elasticsearch, as specified in the workflow file.  Additionally it publishes a container image that pre-installs the plugin on the corresponding elasticsearch container image.
 
