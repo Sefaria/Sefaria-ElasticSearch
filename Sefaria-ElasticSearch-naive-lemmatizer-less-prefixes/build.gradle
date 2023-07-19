@@ -20,7 +20,7 @@ esplugin {
 }
 
 group 'org.sefaria.sefariaplugin'
-version '1.0-SNAPSHOT'
+version = project.hasProperty('version') ? project.version : '1.0.0'
 
 repositories {
     mavenLocal()
