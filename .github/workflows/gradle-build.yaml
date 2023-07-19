@@ -74,10 +74,6 @@ jobs:
           - naive-lemmatizer
           - naive-lemmatizer-less-prefixes
     steps:
-      - name: Debug
-        run: |
-          echo '${{ toJSON(needs) }}'
-          echo '${{ toJSON(github) }}'
       - uses: actions/checkout@v3
       - name: Set up JDK
         uses: actions/setup-java@v3
@@ -87,12 +83,12 @@ jobs:
       - name: Build with Gradle
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: -PVersion=${{ needs.release.outputs.release }} bundlePlugin
+          arguments: -PVersion=${{ needs.release.outputs.version }} bundlePlugin
           build-root-directory: Sefaria-ElasticSearch-${{ matrix.module }}
       - name: Upload artifact
         run: |
           cd Sefaria-ElasticSearch-${{ matrix.module }}/build/distributions
-          gh release upload ${{ needs.release.outputs.release }} '${{ matrix.module }}-${{ needs.release.outputs.release }}.zip' --clobber
+          gh release upload ${{ needs.release.outputs.release }} '${{ matrix.module }}-${{ needs.release.outputs.version }}.zip' --clobber
         env:
          GH_TOKEN: ${{ github.token }}
       - name: cleanup cache
