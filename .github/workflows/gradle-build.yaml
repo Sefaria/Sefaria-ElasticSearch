@@ -76,8 +76,8 @@ jobs:
     steps:
       - name: Debug
         run: |
-          echo ${{ toJSON(needs) }}
-          echo ${{ toJSON(github) }}
+          echo '${{ toJSON(needs) }}'
+          echo '${{ toJSON(github) }}'
       - uses: actions/checkout@v3
       - name: Set up JDK
         uses: actions/setup-java@v3
