@@ -1,6 +1,10 @@
 # Sefaria-ElasticSearch
 various ElasticSearch analyzer plugins useful for analyzing ancient Hebrew
 
+## Plugin builds
+THe latest plugin builds can be found in `Releases`. Given a `.zip` file from a release, use the instructions below to install it.
+
+
 ## How to install a plugin
 This repo contains a few ElasticSearch plugins. Each folder in the root is another plugin.
 To install:
